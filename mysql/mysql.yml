@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-forum-api
+  namespace: lab
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql-forum-api
+          image: amd64/mysql
+          ports:
+            - containerPort: 3306
+          env:
+          - name: MYSQL_DATABASE
+            value: 'forum'
+          - name: MYSQL_PASSWORD
+            value: 'Bk55yc1u0eiqga6e'
+          - name: MYSQL_RANDOM_ROOT_PASSWORD
+            value: 'yes'
+          - name: MYSQL_ROOT_HOST
+            value: '%'
+          - name: MYSQL_USER
+            value: 'forum' 
+          volumeMounts:
+            - name: mysql-initdb
+              mountPath: /docker-entrypoint-initdb.d
+            - mountPath: "/var/lib/mysql"
+              subPath: "mysql"
+              name: mysql-data
+      volumes:
+        - name: mysql-initdb
+          configMap:
+            name: mysql-initdb-config
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data-disk

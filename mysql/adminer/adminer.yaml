@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminer-forum-api
+  namespace: lab
+  labels:
+    app: adminer
+spec:
+  template:
+    metadata:
+      name: adminer-forum-api
+      labels:
+        app:  adminer
+    spec:
+      containers:
+        - name: adminer-forum-api
+          image: adminer
+          ports:
+            - containerPort: 8080                                      
+  selector:
+    matchLabels:
+      app: adminer
+  replicas: 1    
