@@ -1,0 +1,17 @@
+{
+	"ulid": "01GMREGBTTRBGMX2WBEXQPB5SD",
+	"minTime": 1671552000000,
+	"maxTime": 1671559200000,
+	"stats": {
+		"numSamples": 402017,
+		"numSeries": 818,
+		"numChunks": 2578
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01GMREGBTTRBGMX2WBEXQPB5SD"
+		]
+	},
+	"version": 1
+}
