@@ -18,6 +18,9 @@ spec:
       containers:
         - name: app-forum-api
           image: gblbjj/api-forum-api:1.0.0
+          env:
+          - name: TZ
+            value: America/Sao_Paulo
           ports:
             - containerPort: 8080
           imagePullPolicy: Always  
