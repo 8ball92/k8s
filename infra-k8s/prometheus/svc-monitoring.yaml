@@ -4,10 +4,11 @@ metadata:
   name: prometheus-forum-api
   namespace: lab
 spec:
-  type: ClusterIP
   ports:
   - name: prometheus-forum-api
     port: 9090
+    protocol: TCP
     targetPort: 9090
+  type: LoadBalancer
   selector:
     app: prometheus  
