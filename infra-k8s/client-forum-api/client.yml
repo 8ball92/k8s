@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-forum-api
+  namespace: lab
+  labels:
+    app: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client-forum-api
+          image: gblbjj/client-forum-api:2.0.0
+          env:
+          - name: TZ
+            value: America/Sao_Paulo
+          imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+      - name: dockerhub  
+          

@@ -5,7 +5,7 @@
 # 14 e 32 e comente a linha 33, você terá que remover tanto a imagem como
 # o container client-forum-api e subir a stack novamente para o rebuild.
 
-HOST='proxy-forum-api'
+HOST='app-forum-api'
 
 while true
     do
@@ -14,19 +14,19 @@ while true
 	#TEMP=`expr 1 + $(awk -v seed="$RANDOM" 'BEGIN { srand(seed); printf("%.4f\n", rand()) }')`
         
 	if [ $NUMB -le 55 ]; then
-	    curl --silent --output /dev/null http://${HOST}/topicos
+	    curl --silent --output /dev/null http://${HOST}:8080/topicos
         elif [ $NUMB -ge 56 ] && [ $NUMB -le 85 ] ; then
-	    curl --silent --output /dev/null http://${HOST}/topicos/$ENDP
+	    curl --silent --output /dev/null http://${HOST}:8080/topicos/$ENDP
         elif [ $NUMB -ge 86 ] && [ $NUMB -le 95 ] ; then
 	    curl --silent --output /dev/null --data '{"email":"moderador@email.com","senha":"123456"}' \
 		 --header "Content-Type:application/json" \
-		 --request POST http://${HOST}/auth
+		 --request POST http://${HOST}:8080/auth
         elif [ $NUMB -ge 96 ] && [ $NUMB -le 98 ] ; then
 	    curl --silent --output /dev/null --data '{"email":"moderador@email.com","senha":"1234567"}' \
 	         --header "Content-Type:application/json" \
-	         --request POST http://${HOST}/auth
+	         --request POST http://${HOST}:8080/auth
 	else
-	    curl --silent --output /dev/null http://${HOST}/topicos/0
+	    curl --silent --output /dev/null http://${HOST}:8080/topicos/0
         fi
 
 	#sleep $TEMP

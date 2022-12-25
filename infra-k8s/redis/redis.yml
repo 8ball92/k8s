@@ -16,7 +16,7 @@ spec:
         app: redis
     spec:
       containers:
-      - image: redis:alpine
+      - image: redis
         name: redis-forum-api
         ports:
         - containerPort: 6379
