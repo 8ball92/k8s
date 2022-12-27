@@ -5,12 +5,12 @@ metadata:
     app: app
   name: app-forum-api
   namespace: lab
-spec:
-  type: ClusterIP
+spec:    
   ports:
   - name: app-forum-api
     port: 8080
+    protocol: TCP
     targetPort: 8080
+  type: LoadBalancer
   selector:
-    app: app
-    
+    app: app     

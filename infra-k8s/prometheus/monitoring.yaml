@@ -36,6 +36,10 @@ spec:
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
+        - name: alert-config
+          configMap:
+            defaultMode: 420
+            name: alertrules    
         - name: mysql-data
           persistentVolumeClaim:
             claimName: prometheus-data-disk    

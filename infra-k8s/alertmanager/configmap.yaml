@@ -1,0 +1,21 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager-config
+  namespace: lab
+data:
+  alertmanager.yml: |-
+   
+    global:
+      resolve_timeout: 1m
+      slack_api_url: 'https://hooks.slack.com/services/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'
+    receivers:
+    - name: 'slack-notificaions'
+      slack_configs:
+      - channel: '#forum-api'
+        send_resolved: true
+    route:
+      group_interval: 5m
+      group_wait: 10s
+      receiver: 'slack-notificaions'
+      repeat_interval: 3h

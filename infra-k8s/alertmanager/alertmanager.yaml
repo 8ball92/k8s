@@ -19,14 +19,15 @@ spec:
         image: prom/alertmanager:latest
         args:
           - '--config.file=/etc/alertmanager/alertmanager.yml'
+          - "--storage.path=/alertmanager"
         ports:
         - name: alertmanager
           containerPort: 9093
         volumeMounts:
-        - name: config-volume
-          mountPath: /etc/alertmanager
+        - name: alertmanager-config
+          mountPath: /etc/alertmanager/
       volumes:
-      - name: config-volume
+      - name: alertmanager-config
         configMap:
           name: alertmanager
       

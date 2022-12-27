@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuma-forum-api
+  namespace: lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuma
+  template:
+    metadata:
+      name: kuma-forum-api
+      labels:
+        app: kuma
+    spec:
+      containers:
+      - name: kuma-forum-api
+        image: louislam/uptime-kuma:1
+        ports:
+        - name: kuma-forum-api
+          containerPort: 3001
+        volumeMounts:
+            - mountPath: /app/data 
+              name: kuma-pvc            
+      volumes:
+        - name: kuma-pvc
+          persistentVolumeClaim:
+            claimName: kuma-pvc
