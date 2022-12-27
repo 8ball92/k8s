@@ -5,11 +5,10 @@ metadata:
   namespace: lab
 spec:
   ports:
-  - name: kuma
-    nodePort: 30080
+  - name: kuma-forum-api
     port: 3001
     protocol: TCP
     targetPort: 3001
+  type: LoadBalancer
   selector:
-    app: kuma
-  type: NodePort  
+    app: kuma  
