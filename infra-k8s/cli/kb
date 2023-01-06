@@ -1,0 +1,43 @@
+#!/bin/bash
+
+COMMAND=$1
+
+case $COMMAND in
+	po)
+		kubectl get po $2 $3 
+	;;
+	svc)
+        kubectl get service $2 $3 
+    ;;
+	dpo)
+        kubectl describe po $2 $3 $4
+    ;;
+	dpl)
+        kubectl get deployment $2 $3 
+    ;;
+    ig)
+        kubectl get ingress $2 $3 
+    ;;
+    pv)
+        kubectl get pv $2 $3 
+    ;;
+    pvc)
+        kubectl get pvc $2 $3 
+    ;;
+    klogs)
+        kubectl logs po $2 $3 
+    ;;
+    rollout)
+        kubectl rollout deployment restart $2 $3 
+    ;;
+    kgnodes)
+        kubectl get nodes
+    ;;
+    ns)
+        kubectl get ns
+    ;;
+    *)
+        kubectl 
+    ;;
+      
+  esac

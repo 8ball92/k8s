@@ -1,27 +1,56 @@
-apiVersion: apps/v1
-kind: Deployment
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: client-forum-api
+#   namespace: lab
+#   labels:
+#     app: client
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: client
+#   template:
+#     metadata:
+#       labels:
+#         app: client
+#     spec:
+#       containers:
+#         - name: client-forum-api
+#           image: gblbjj/client-forum-api:2.0.0
+#           env:
+#           - name: TZ
+#             value: America/Sao_Paulo
+#           imagePullPolicy: IfNotPresent
+#       imagePullSecrets:
+#       - name: dockerhub  
+          
+apiVersion: batch/v1
+kind: CronJob
 metadata:
   name: client-forum-api
   namespace: lab
   labels:
     app: client
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: client
-  template:
-    metadata:
-      labels:
-        app: client
+  schedule: "* * * * *"
+  jobTemplate:
     spec:
-      containers:
-        - name: client-forum-api
-          image: gblbjj/client-forum-api:2.0.0
-          env:
-          - name: TZ
-            value: America/Sao_Paulo
-          imagePullPolicy: IfNotPresent
-      imagePullSecrets:
-      - name: dockerhub  
-          
+      template:
+        spec:
+          containers:
+          - name: client-forum-api
+            image: ubuntu:latest  
+            command:
+            - /bin/sh
+            - -c
+            - curl -v http://proxy-forum-api:8080/topicos
+            # args: |
+            #     curl -v http://proxy-forum-api:8080/topicos
+            #     curl -v --data '{"email":"moderador@email.com","senha":"123456"}' --header "Content-Type:application/json" --request POST http://proxy-forum-api:8080/auth
+            #     curl -v --data '{"email":"moderador@email.com","senha":"1234567"}' --header "Content-Type:application/json" --request POST http://proxy-forum-api:8080/auth
+            #     curl -v http://proxy-forum-api:8080/topicos/0
+            imagePullPolicy: IfNotPresent    
+          imagePullSecrets:
+          - name: dockerhub  
+          restartPolicy: OnFailure

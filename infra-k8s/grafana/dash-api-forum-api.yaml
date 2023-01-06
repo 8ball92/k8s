@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-forum-api
-  labels:
-    name: grafana-forum-api
+  name: grafana-dashboards-app
   namespace: lab
+  labels:
+    app: grafana
 data:
-  dash-forum-api.json: |-
+
+  dash-forum-api.json: |
     {
       "annotations": {
         "list": [
@@ -181,7 +182,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "h4RdE-cVz"
+                "uid": "Prometheus"
               },
               "editorMode": "code",
               "expr": "sum(jvm_memory_used_bytes{job=\"$job\", instance=\"$instance\", area=\"nonheap\"}) * 100 / sum(jvm_memory_max_bytes{job=\"$job\",instance=\"$instance\", area=\"nonheap\"})",

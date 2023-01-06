@@ -3,17 +3,44 @@ kind: Ingress
 metadata:
   name: kuma-forum-api
   namespace: lab
+  labels:
+    app: kuma
+    name: kuma-forum-api
+    namespace: lab
   annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-    - host: kuma.dev
+    - host: kuma.127.0.0.1.dev
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: kuma-forum-api
-                port:
-                  number: 3001
+        - backend:
+            service:
+              name: kuma-forum-api
+              port:
+                number: 80
+          path: /kuma 
+          pathType: ImplementationSpecific     
+        
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: dominio-ingress
+#   namespace: lab
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - host: kuma.127.0.0.1.dev
+#       http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: kuma-forum-api
+#               port:
+#                 number: 3001
+   
+# apiVersion: networking.k8s.io/v1beta1 # for k3s < v1.19

@@ -23,9 +23,20 @@ spec:
             - containerPort: 3000
           volumeMounts:
             - mountPath: /var/lib/grafana
-              name: grafana-pvc            
+              name: grafana-pvc       
+            - mountPath: /etc/grafana/provisioning/datasources/prometheus.yaml
+              subPath: prometheus.yaml
+              name: grafana-datasources  
+            # - mountPath: /etc/grafana/provisioning/dashboard/dash-forum-api.json
+            #   subPath: dash-forum-api.json
+            #   name: grafana-dashboards-app 
       volumes:
         - name: grafana-pvc
           persistentVolumeClaim:
             claimName: grafana-pvc
-        
+        - name: grafana-datasources
+          configMap:
+            name: grafana-datasources     
+        # - name: grafana-dashboards-app
+        #   configMap:
+        #     name: grafana-dashboards-app

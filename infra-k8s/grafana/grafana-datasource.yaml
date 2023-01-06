@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: lab
+  labels:
+    app: grafana
+data:
+  prometheus.yaml: |-
+    apiVersion: 1
+    datasources:
+    - access: proxy
+      editable: true
+      isDefault: true
+      name: Prometheus
+      orgId: 1
+      type: prometheus
+      url: http://prometheus-forum-api:9090
+      version: 1

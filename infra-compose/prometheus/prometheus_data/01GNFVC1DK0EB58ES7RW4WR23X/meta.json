@@ -1,0 +1,17 @@
+{
+	"ulid": "01GNFVC1DK0EB58ES7RW4WR23X",
+	"minTime": 1672336942873,
+	"maxTime": 1672344000000,
+	"stats": {
+		"numSamples": 149538,
+		"numSeries": 914,
+		"numChunks": 1385
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01GNFVC1DK0EB58ES7RW4WR23X"
+		]
+	},
+	"version": 1
+}

@@ -17,20 +17,27 @@ spec:
     spec:
       containers:
         - name: mysql-forum-api
-          image: amd64/mysql
+          # image: amd64/mysql
+          image: mysql
           ports:
             - containerPort: 3306
           env:
           - name: MYSQL_DATABASE
             value: 'forum'
           - name: MYSQL_PASSWORD
-            value: 'Bk55yc1u0eiqga6e'
+            valueFrom:
+              secretKeyRef:
+                name: mysql
+                key: password
           - name: MYSQL_RANDOM_ROOT_PASSWORD
             value: 'yes'
           - name: MYSQL_ROOT_HOST
             value: '%'
           - name: MYSQL_USER
-            value: 'forum' 
+            valueFrom:
+              secretKeyRef:
+                name: mysql
+                key: username 
           volumeMounts:
             - name: mysql-initdb
               mountPath: /docker-entrypoint-initdb.d

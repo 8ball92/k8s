@@ -1,8 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kuma-forum-api
   namespace: lab
+  labels:
+    app: kuma
+    name: kuma-forum-api
+    namespace: lab
 spec:
   replicas: 1
   selector:

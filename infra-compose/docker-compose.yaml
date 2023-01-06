@@ -117,6 +117,16 @@ services:
       - monit
     depends_on:
       - prometheus-forum-api
+  loki-api-cursos:
+    image: grafana/loki
+    container_name: loki-api-cursos
+    command: 
+      - -config.file=/etc/loki/local-config.yaml
+      - -print-config-stderr=true
+    ports:
+      - "3100:3100"
+    networks:
+      - monit    
 
   client-forum-api:
     build:
